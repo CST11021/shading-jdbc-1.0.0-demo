@@ -101,6 +101,7 @@ public final class SQLRouteEngine {
 
             });
 
+            // 根据条件，解析成多个SQL执行单元
             Collection<SQLExecutionUnit> sqlExecutionUnits = routeSQL(each, logicTables, parsedResult.getRouteContext().getSqlBuilder());
 
             // 添加执行单元

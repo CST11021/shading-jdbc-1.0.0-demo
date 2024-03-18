@@ -40,7 +40,7 @@ public final class OrParser {
     }
     
     /**
-     *  解析SQL.
+     * 解析SQL.
      * 
      * @return SQL解析结果
      */

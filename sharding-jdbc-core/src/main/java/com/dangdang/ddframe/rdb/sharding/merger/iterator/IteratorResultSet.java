@@ -40,7 +40,13 @@ public final class IteratorResultSet extends AbstractShardingResultSet {
     public IteratorResultSet(final List<ResultSet> resultSets, final MergeContext mergeContext) {
         super(resultSets, mergeContext.getLimit());
     }
-    
+
+    /**
+     * 将游标指向下一行
+     *
+     * @return
+     * @throws SQLException
+     */
     @Override
     protected boolean nextForSharding() throws SQLException {
         if (getCurrentResultSet().next()) {

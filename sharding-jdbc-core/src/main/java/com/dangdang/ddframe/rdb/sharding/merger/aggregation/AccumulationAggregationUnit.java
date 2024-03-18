@@ -17,12 +17,11 @@
 
 package com.dangdang.ddframe.rdb.sharding.merger.aggregation;
 
-import java.math.BigDecimal;
-
 import com.dangdang.ddframe.rdb.sharding.merger.common.ResultSetUtil;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.math.BigDecimal;
 
 /**
  * 累加聚合单元.
@@ -36,7 +35,12 @@ public final class AccumulationAggregationUnit extends AbstractAggregationUnit {
     private final Class<?> returnType;
     
     private BigDecimal result = new BigDecimal(0);
-    
+
+    /**
+     * 将每个结果集的count()结果再进行相加
+     *
+     * @param values
+     */
     @Override
     public void doMerge(final Comparable<?>... values) {
         result = result.add(new BigDecimal(values[0].toString()));
@@ -44,7 +48,7 @@ public final class AccumulationAggregationUnit extends AbstractAggregationUnit {
     }
     
     @Override
-    public Comparable<?>  getResult() {
+    public Comparable<?> getResult() {
         return (Comparable<?>) ResultSetUtil.convertValue(result, returnType);
     }
 }

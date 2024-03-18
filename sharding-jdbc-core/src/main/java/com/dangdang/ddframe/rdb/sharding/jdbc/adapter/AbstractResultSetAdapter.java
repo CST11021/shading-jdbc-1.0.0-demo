@@ -17,15 +17,11 @@
 
 package com.dangdang.ddframe.rdb.sharding.jdbc.adapter;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.Statement;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.sql.*;
+import java.util.List;
 
 /**
  * 处理多结果集的适配器.
@@ -34,7 +30,8 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public abstract class AbstractResultSetAdapter extends AbstractResultSetGetterAdapter {
-    
+
+    /** 每个执行单元对应的结果集 */
     @Getter
     private final List<ResultSet> resultSets;
     

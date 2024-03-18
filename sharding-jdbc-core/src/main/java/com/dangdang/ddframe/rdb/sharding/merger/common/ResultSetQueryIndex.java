@@ -34,12 +34,17 @@ import lombok.Getter;
 public final class ResultSetQueryIndex {
     
     private static final int NO_INDEX = -1;
-    
+
+    /** ResultSet获取字段值时，字段的索引位置 */
     private final int queryIndex;
-    
+
+    /** ResultSet获取字段值时，字段的名字 */
     private final String queryName;
     
     public ResultSetQueryIndex(final Object queryParam) {
+        // ResultSet#getXxx()函数，获取字段值时，一般有以下两种：
+        // String getString(int columnIndex)
+        // String getString(String columnLabel)
         if (queryParam instanceof Integer) {
             queryIndex = (int) queryParam;
             queryName = null;

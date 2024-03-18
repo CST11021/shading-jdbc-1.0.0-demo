@@ -35,7 +35,8 @@ public abstract class AbstractShardingResultSet extends AbstractResultSetAdapter
 
     /** limit */
     private final Limit limit;
-    
+
+    /** 表示当前游标是否指向offset位置 */
     private boolean offsetSkipped;
 
     /** 当前读取的行数 */
@@ -54,7 +55,10 @@ public abstract class AbstractShardingResultSet extends AbstractResultSetAdapter
         }
         return null == limit ? nextForSharding() : ++readCount <= limit.getRowCount() && nextForSharding();
     }
-    
+
+    /**
+     * 将ResultSet的游标指向offset位置
+     */
     private void skipOffset() {
         for (int i = 0; i < limit.getOffset(); i++) {
             try {

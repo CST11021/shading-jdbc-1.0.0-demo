@@ -17,27 +17,19 @@
 
 package com.dangdang.ddframe.rdb.sharding.jdbc.adapter;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.Blob;
-import java.sql.Clob;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLXML;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Map;
-
 import com.dangdang.ddframe.rdb.sharding.jdbc.unsupported.AbstractUnsupportedOperationResultSet;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.*;
+import java.util.Calendar;
+import java.util.Map;
 
 /**
  * 处理多结果集的适配器.
@@ -46,7 +38,8 @@ import lombok.Setter;
  */
 @RequiredArgsConstructor
 public abstract class AbstractResultSetGetterAdapter extends AbstractUnsupportedOperationResultSet {
-    
+
+    /** 当前的ResultSet */
     @Getter(AccessLevel.PROTECTED)
     @Setter(AccessLevel.PROTECTED)
     private ResultSet currentResultSet;

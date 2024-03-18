@@ -17,12 +17,12 @@
 
 package com.dangdang.ddframe.rdb.sharding.merger.aggregation;
 
+import com.dangdang.ddframe.rdb.sharding.merger.common.ResultSetQueryIndex;
+import com.dangdang.ddframe.rdb.sharding.parser.result.merger.AggregationColumn;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import com.dangdang.ddframe.rdb.sharding.merger.common.ResultSetQueryIndex;
-import com.dangdang.ddframe.rdb.sharding.parser.result.merger.AggregationColumn;
 
 /**
  * 归并计算单元的抽象类.
@@ -32,7 +32,9 @@ import com.dangdang.ddframe.rdb.sharding.parser.result.merger.AggregationColumn;
 public abstract class AbstractAggregationUnit implements AggregationUnit {
     
     @Override
-    public final void merge(final AggregationColumn aggregationColumn, final AggregationValue aggregationValue, final ResultSetQueryIndex resultSetQueryIndex) throws SQLException {
+    public final void merge(final AggregationColumn aggregationColumn, final AggregationValue aggregationValue,
+                            final ResultSetQueryIndex resultSetQueryIndex) throws SQLException {
+
         if (!aggregationColumn.getDerivedColumns().isEmpty()) {
             Collection<Comparable<?>> paramList = new ArrayList<Comparable<?>>(aggregationColumn.getDerivedColumns().size());
             for (AggregationColumn each : aggregationColumn.getDerivedColumns()) {
@@ -42,7 +44,13 @@ public abstract class AbstractAggregationUnit implements AggregationUnit {
         } else {
             doMerge(aggregationValue.getValue(resultSetQueryIndex));
         }
+
     }
-    
+
+    /**
+     *
+     *
+     * @param values
+     */
     protected abstract void doMerge(Comparable<?>... values);
 }

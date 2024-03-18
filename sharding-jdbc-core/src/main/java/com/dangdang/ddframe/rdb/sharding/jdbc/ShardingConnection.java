@@ -17,21 +17,17 @@
 
 package com.dangdang.ddframe.rdb.sharding.jdbc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.codahale.metrics.Timer.Context;
 import com.dangdang.ddframe.rdb.sharding.api.DatabaseType;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.jdbc.adapter.AbstractConnectionAdapter;
 import com.dangdang.ddframe.rdb.sharding.metrics.MetricsContext;
 import com.dangdang.ddframe.rdb.sharding.router.SQLRouteEngine;
+
+import java.sql.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 支持分片的数据库连接.
@@ -71,7 +67,12 @@ public final class ShardingConnection extends AbstractConnectionAdapter {
         connectionMap.put(dataSourceName, connection);
         return connection;
     }
-    
+
+    @Override
+    public Collection<Connection> getConnections() {
+        return connectionMap.values();
+    }
+
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {
         return metaData;
@@ -122,8 +123,5 @@ public final class ShardingConnection extends AbstractConnectionAdapter {
         return new ShardingStatement(sqlRouteEngine, this, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
     
-    @Override
-    public Collection<Connection> getConnections() {
-        return connectionMap.values();
-    }
+
 }

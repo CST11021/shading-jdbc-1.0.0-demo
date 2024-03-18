@@ -17,12 +17,11 @@
 
 package com.dangdang.ddframe.rdb.sharding.merger.aggregation;
 
-import java.math.BigDecimal;
-
 import com.dangdang.ddframe.rdb.sharding.merger.common.ResultSetUtil;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.math.BigDecimal;
 
 /**
  * 平均值聚合单元.
@@ -38,7 +37,12 @@ public class AvgAggregationUnit extends AbstractAggregationUnit {
     private BigDecimal count = new BigDecimal(0);
     
     private BigDecimal sum = new BigDecimal(0);
-    
+
+    /**
+     * 求平均值
+     *
+     * @param values
+     */
     @Override
     public void doMerge(final Comparable<?>... values) {
         count = count.add(new BigDecimal(values[0].toString()));

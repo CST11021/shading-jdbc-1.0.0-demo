@@ -17,16 +17,11 @@
 
 package com.dangdang.ddframe.rdb.sharding.parser.result.merger;
 
+import com.google.common.base.Optional;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.base.Optional;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * 聚合列对象.
@@ -40,7 +35,8 @@ import lombok.ToString;
 public final class AggregationColumn {
     
     private final String expression;
-    
+
+    /** 聚合函数类型 */
     private final AggregationType aggregationType;
     
     private final Optional<String> alias;
